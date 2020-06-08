@@ -20,7 +20,7 @@ public class JumpBootsItem extends ArmorItem {
     public static final String REGISTRY_NAME = "jump_boots";
     public static ArmorItem instance;
 
-    public static int avgSecondsToDamage = 15;
+    public static final int avgSecondsToDamage = 15;
 
     static {
         instance = new JumpBootsItem();
@@ -28,7 +28,7 @@ public class JumpBootsItem extends ArmorItem {
 
     public JumpBootsItem() {
         super(JumpArmorMaterial.jumpArmor, EquipmentSlotType.FEET, new Properties().group(ItemGroup.COMBAT));
-        instance = (ArmorItem) this.setRegistryName(MOD_ID, REGISTRY_NAME);
+        this.setRegistryName(MOD_ID, REGISTRY_NAME);
     }
 
 
@@ -37,9 +37,8 @@ public class JumpBootsItem extends ArmorItem {
         player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, 0, 4, false, false, false));
 
         if (slot == EquipmentSlotType.FEET && stack.getItem() == this && !player.onGround) { //TODO: research ways to use isJumping or simply the jumpkey
-            //LOGGER.fatal("I am NOT ON GROUND, speed should change");
-
-            //TODO: hahhah this is utter bullshit but i hate attribute modifiers so it stay. Also FOV change bad
+            //TODO: hahhah this is utter bullshit but i hate attribute modifiers so it stays. Also FOV change bad
+            //TODO: also it sucks donkey balls that speed is only applied in air and isn't there for the instant u land, need to use jump key holding
             //https://www.minecraftforge.net/forum/topic/47519-1102how-to-change-player-speed-without-changing-fov/
             player.addPotionEffect(new EffectInstance(Effects.SPEED, 2, 0, false, false, false));
 
@@ -51,8 +50,7 @@ public class JumpBootsItem extends ArmorItem {
     }
 
     //TODO: Fancy effects
-
-    //    @SubscribeEvent
+    // @SubscribeEvent
 //    public static void onTickEvent(TickEvent.PlayerTickEvent event) {
 //        LOGGER.fatal("Stopped being in the air etc, speed back to normal");
 //    }
